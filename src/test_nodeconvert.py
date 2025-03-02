@@ -76,6 +76,10 @@ class TestNodeConvert(unittest.TestCase):
         nodes = split_nodes_delimiter([], "*", TextType.BOLD)
         self.assertEqual(nodes, [])
 
+    def test_no_delimiter_found(self):
+        n = TextNode("code block here *bold text here* nothing", TextType.NORMAL)
+        new_nodes = split_nodes_delimiter([n], "`", TextType.CODE)
+        self.assertEqual(str(new_nodes), "[TextNode(code block here *bold text here* nothing, normal, None)]")
 
         
         
