@@ -81,6 +81,17 @@ class TestNodeConvert(unittest.TestCase):
         new_nodes = split_nodes_delimiter([n], "`", TextType.CODE)
         self.assertEqual(str(new_nodes), "[TextNode(code block here *bold text here* nothing, normal, None)]")
 
+# extract_markdown_images tests
+
+    def test_one_image(self):
+        text = '![displaytext](https://google.com)'
+        matches = extract_markdown_images(text)
+        self.assertEqual(str(matches), "[('displaytext', 'https://google.com')]") 
+
+    def test_multiple_images(self):
+        text = '![displaytext](https://google.com) plus more stuff and another link ![here](https://facebook.com)' 
+        matches = extract_markdown_images(text)
+        self.assertEqual(str(matches), "[('displaytext', 'https://google.com'), ('here', 'https://facebook.com')]")
         
         
         

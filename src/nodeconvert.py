@@ -1,5 +1,6 @@
 from textnode import *
 from leafnode import *
+import re
 
 def text_node_to_html_node(text_node):
     if text_node.text_type not in TextType:
@@ -21,10 +22,6 @@ def text_node_to_html_node(text_node):
 
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    # going to return a list of nodes, split by the delimter
-    # split the string on the delimiter 
-    # 'this is a `code` string => ['this is a ', 'code', ' string']
-    # start with edge cases
     new_nodes = []
     if len(old_nodes) == 0: 
         return old_nodes
@@ -42,11 +39,14 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                     new_nodes.append(TextNode(value, text_type))
     return new_nodes
 
+def extract_markdown_images(text):
+    #takes raw markdown text and returns a list of tuples
+    #remember that markdown for images follows the pattern:
+    # ![displaytext](url) 
+    # re.findall(r"!\[(.*?)\]\((.*?)\)", text)
+    return re.findall(r"!\[(.*?)\]\((.*?)\)", text) 
 
 
 
 
 
-    #the odd numbered indices will always be the values 'inside' our delimiter
-    #how do we determine if we don't find a closing delimiter?
-    #if the length is even after splitting, no closing delimiter was found 
