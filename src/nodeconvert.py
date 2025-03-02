@@ -44,8 +44,10 @@ def extract_markdown_images(text):
     #remember that markdown for images follows the pattern:
     # ![displaytext](url) 
     # re.findall(r"!\[(.*?)\]\((.*?)\)", text)
-    return re.findall(r"!\[(.*?)\]\((.*?)\)", text) 
+    return re.findall(r"\!\[(.*?)\]\((.*?)\)", text) 
 
+def extract_markdown_links(text):
+    return re.findall(r"[^!]\[(.*?)\]\((.*?)\)", text)
 
 
 

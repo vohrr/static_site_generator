@@ -92,8 +92,32 @@ class TestNodeConvert(unittest.TestCase):
         text = '![displaytext](https://google.com) plus more stuff and another link ![here](https://facebook.com)' 
         matches = extract_markdown_images(text)
         self.assertEqual(str(matches), "[('displaytext', 'https://google.com'), ('here', 'https://facebook.com')]")
+    
+    def test_no_image_matched(self):
+        text = 'this is a plaintext string with some tricky catches! but nothing to see here'
+        matches = extract_markdown_images(text)
+        self.assertEqual(matches, [])
+
+
+    def test_one_image_one_link_match_image(self):
+        text = '![displaytext](https://google.com) plus more stuff and another link [here](https://facebook.com)' 
+        matches = extract_markdown_images(text)
+        self.assertEqual(str(matches), "[('displaytext', 'https://google.com')]")
+
+# extract_markdown_links tests
+
+    def test_one_link(self):
+        text = '![displaytext](https://google.com)'
+        matches = extract_markdown_links(text)
+        self.assertEqual(matches, []) 
         
-        
-        
-        
-        
+    def test_one_image_one_link_match_link(self):
+        text = '![displaytext](https://google.com) plus more stuff and another link [here](https://facebook.com)' 
+        matches = extract_markdown_links(text)
+        self.assertEqual(str(matches), "[('here', 'https://facebook.com')]")
+
+
+
+
+
+
