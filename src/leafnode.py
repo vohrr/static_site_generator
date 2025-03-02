@@ -1,4 +1,5 @@
 from htmlnode import *
+from textnode import *
 
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
@@ -16,4 +17,4 @@ class LeafNode(HTMLNode):
             return f"<{self.tag}>{self.value}</{self.tag}>"
                 
         return f"<{self.tag} {super().props_to_html()}>{self.value}</{self.tag}>"
-        
+
